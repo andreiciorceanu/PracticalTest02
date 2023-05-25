@@ -80,13 +80,13 @@ public class CommunicationThread extends Thread {
                     Log.i(Constants.TAG, pageSourceCode);
                 }
 
-                JSONObject content = new JSONObject(pageSourceCode);
-                JSONObject meanings    = content.getJSONObject("meanings");
-                JSONArray definitions     = meanings.getJSONArray("definitions");
-                String definition = definitions.getJSONObject(0).getString("definition");
+//                JSONObject content = new JSONObject(pageSourceCode);
+//                JSONObject meanings    = content.getJSONObject("meanings");
+//                JSONArray definitions     = meanings.getJSONArray("definitions");
+//                String definition = definitions.getJSONObject(0).getString("definition");
 
 
-                dataModel = new DataModel(definition);
+                dataModel = new DataModel(pageSourceCode);
 
                 data.put(word, dataModel);
                 serverThread.setData(data);
@@ -96,7 +96,7 @@ public class CommunicationThread extends Thread {
             printWriter.println(dataModel);
             printWriter.flush();
 
-        } catch (IOException | JSONException ioException) {
+        } catch (IOException ioException) {
             Log.e(Constants.TAG, "[COMMUNICATION THREAD] An exception has occurred: " + ioException.getMessage());
         } finally {
             if (socket != null) {
